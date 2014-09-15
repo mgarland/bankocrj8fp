@@ -22,7 +22,7 @@ public class Main {
     
     private static final String REPORT_EXTENSION = ".report";
 
-    public static void processFile(String inputFile) {
+    private static void processFile(String inputFile) {
         
         String outputFile = inputFile + REPORT_EXTENSION;
         
