@@ -1,5 +1,7 @@
 package com.mag.kata.bankocr;
 
+import static com.mag.kata.bankocr.AccountNumber.Status;
+
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
@@ -18,13 +20,29 @@ public class AccountNumberValidation {
 
     private static final int MOD_VALUE = 11;
     
-      // Creates a list of di's for the checksum calculation.
-      // d9, d8, d7, ... d1      
-      private static final Function<Integer, List<Integer>> CREATE_DIs = i ->
+    // Creates a list of di's for the checksum calculation.
+    // d9, d8, d7, ... d1      
+    private static final Function<Integer, List<Integer>> CREATE_DIs = i ->
               IntStream.rangeClosed(1, i)
                        .boxed()
                        .sorted( (l,r) -> Integer.compare(r, l) )
                        .collect(Collectors.toList());
+              
+    /**
+     * Returns the account number status.
+     * 
+     * @param accountNumber account number to validate.
+     * @return the status
+     */
+    public static AccountNumber.Status getStatus(AccountNumber accountNumber) {
+        if (isIllegible(accountNumber)) {
+            return Status.ILLEGIBLE;
+        } else if (!isValidCheckSum(accountNumber)) {
+            return Status.INVALID;
+        } else {
+            return Status.OK;
+        }
+    }
 
     /**
      * Indicates if the the checksum is valid for the account number.
@@ -35,12 +53,12 @@ public class AccountNumberValidation {
     public static boolean isValidCheckSum(AccountNumber accountNumber) {
 
         // d9, d8, d7, ... d1
-        List<Integer> ds = CREATE_DIs.apply((int)accountNumber.getDigits()
+        List<Integer> ds = CREATE_DIs.apply((int)accountNumber.digits
                                      .stream()
                                      .count());
         
         // account numbers a1, a2, ... a9
-        List<Integer> digits = accountNumber.getDigits()
+        List<Integer> digits = accountNumber.digits
                                             .stream()
                                             .map( a -> a.get() )
                                             .collect(Collectors.toList());
@@ -60,7 +78,7 @@ public class AccountNumberValidation {
      * @return indicates if checksum was valid
      */
     public static boolean isIllegible(AccountNumber accountNumber) {
-        return !accountNumber.getDigits()
+        return !accountNumber.digits
                              .stream()
                              .allMatch( Optional::isPresent );
     }

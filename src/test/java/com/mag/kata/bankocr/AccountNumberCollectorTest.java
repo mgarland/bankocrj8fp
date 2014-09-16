@@ -28,7 +28,7 @@ public class AccountNumberCollectorTest {
         
         assertEquals("Expected account number = 123456789",
                         "123456789", 
-                        collector.getAccountNumbers().get(0).getAccountNumber());
+                        collector.getAccountNumbers().get(0).accountNumber);
     }
     
     @Test
@@ -51,7 +51,7 @@ public class AccountNumberCollectorTest {
         
         assertEquals("Expected account number = 123456789",
                         "123456789", 
-                        collector1.getAccountNumbers().get(1).getAccountNumber());
+                        collector1.getAccountNumbers().get(1).accountNumber);
     }
 
 }

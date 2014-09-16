@@ -27,7 +27,7 @@ public class AccountNumberTest {
         
         assertEquals("Expected account number = 123456789",
                         "123456789", 
-                        accountNumber.getAccountNumber());
+                        accountNumber.accountNumber);
     }
     
     @Test
@@ -36,14 +36,14 @@ public class AccountNumberTest {
         AccountNumber accountNumber = new AccountNumber(invalid);
         
         assertFalse("account number contains an invalid digit",
-                        accountNumber.getDigits().stream()
+                        accountNumber.digits.stream()
                              .allMatch( Optional::isPresent ));
         
         assertTrue("digit 2 should not be present", 
-                        !accountNumber.getDigits().get(1).isPresent());
+                        !accountNumber.digits.get(1).isPresent());
         assertEquals("digit 9 should be present",
                         Optional.of(9),
-                        accountNumber.getDigits().get(8));
+                        accountNumber.digits.get(8));
     }
 
 
