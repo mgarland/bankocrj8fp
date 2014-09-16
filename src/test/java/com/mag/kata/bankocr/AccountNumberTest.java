@@ -27,9 +27,7 @@ public class AccountNumberTest {
         
         assertEquals("Expected account number = 123456789",
                         "123456789", 
-                        accountNumber.getDigits().stream()
-                             .map( a -> a.get().toString() )
-                             .reduce("", (a,b) -> a + b));
+                        accountNumber.getAccountNumber());
     }
     
     @Test
@@ -41,9 +39,9 @@ public class AccountNumberTest {
                         accountNumber.getDigits().stream()
                              .allMatch( Optional::isPresent ));
         
-        assertTrue("digit 2 is not valid", 
+        assertTrue("digit 2 should not be present", 
                         !accountNumber.getDigits().get(1).isPresent());
-        assertEquals("digit 9 is valid",
+        assertEquals("digit 9 should be present",
                         Optional.of(9),
                         accountNumber.getDigits().get(8));
     }

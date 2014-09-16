@@ -17,17 +17,20 @@ import java.util.stream.Collectors;
  */
 public class AccountNumber {
     
-    private static final int LINE_LENGTH = 27;
-    
-    private static Function<Optional<Integer>, String> DIGIT_TO_STRING = d ->
-                                d.isPresent() ?  d.get().toString() : "?";
+    // Converts a digit to its numeric value, "?" if the digit is invalid
+    private static Function<Optional<Integer>, String> DIGIT_TO_STRING =
+                    d ->  d.isPresent() ?  d.get().toString() : "?";
 
     private String accountNumberString;
 
+    /**
+     * Construct from a full account number string - 3 lines combined.
+     * 
+     * @param accountNumberString the full account number string
+     */
     public AccountNumber(String accountNumberString) {
         this.accountNumberString = accountNumberString;
     }
-
 
     /**
      * Returns the account number as a list of digits.
@@ -36,11 +39,7 @@ public class AccountNumber {
      * @return list of optional numbers
      */
     public List<Optional<Integer>> getDigits() {
-        return OCR.parse(accountNumberString.substring(0,LINE_LENGTH),
-                         accountNumberString.substring(LINE_LENGTH,LINE_LENGTH*2),
-                         accountNumberString.substring(LINE_LENGTH*2)).stream()
-                  .map( Digit::get )
-                  .collect(Collectors.toList());
+        return OCR.parse(accountNumberString);
     }
     
     /**
@@ -50,8 +49,8 @@ public class AccountNumber {
      */
     public String getAccountNumber() {
         return getDigits().stream()
-                  .map( DIGIT_TO_STRING )
-                  .reduce("", (a,b) -> a + b);
+                          .map( DIGIT_TO_STRING )
+                          .reduce("", (a,b) -> a + b);
     }
 
     @Override

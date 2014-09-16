@@ -39,13 +39,13 @@ public class AccountNumberReport {
 
         // Get the status for each account number
         List<String> statuses = accountNumbers.stream()
-                                            .map( GET_STATUS )
-                                            .collect(Collectors.toList());
+                                              .map( GET_STATUS )
+                                              .collect(Collectors.toList());
         
         // Ouptut the report line
         StreamUtils.zip(accountNumbers.stream(), statuses.stream(), 
                         (a,s) -> a.getAccountNumber() + " " + s + "\n")
-                .forEach(output);
+                   .forEach(output);
 
         
     }

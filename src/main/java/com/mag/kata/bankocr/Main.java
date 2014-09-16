@@ -30,9 +30,9 @@ public class Main {
 
             // Slurp the input file and add line numbers
             Path file = Paths.get(inputFile);
-            List<Indexed<String>> indexedLines = StreamUtils
-                            .zipWithIndex(Files.readAllLines(file).stream())
-                            .collect(Collectors.toList());
+            List<Indexed<String>> indexedLines = 
+                    StreamUtils.zipWithIndex(Files.readAllLines(file).stream())
+                               .collect(Collectors.toList());
             
             // Create account numbers from the input lines
             AccountNumberCollector collector = indexedLines.stream()
