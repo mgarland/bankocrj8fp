@@ -45,6 +45,18 @@ public class AccountNumberTest {
                         Optional.of(9),
                         accountNumber.digits.get(8));
     }
-
+    
+    @Test
+    public void generateAlternatives() {
+        AccountNumber accountNumber = new AccountNumber(valid);
+       
+        assertEquals("The first character is incorrect",
+                        '|',
+                        accountNumber.generateAlternatives().get(0).inputLine.charAt(0));
+        
+        assertEquals("The rest is incorrect",
+                        valid.substring(1),
+                        accountNumber.generateAlternatives().get(0).inputLine.substring(1));
+    }
 
 }

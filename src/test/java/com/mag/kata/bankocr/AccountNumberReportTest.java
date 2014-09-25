@@ -1,10 +1,12 @@
 package com.mag.kata.bankocr;
 
+import static org.junit.Assert.assertEquals;
+
 import java.io.StringWriter;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class AccountNumberReportTest {
@@ -21,7 +23,12 @@ public class AccountNumberReportTest {
                                              "| ||_||_||_||_||_||_||_||_|" +
                                              "|_||_||_||_||_||_||_||_||_|";
 
-    @Test
+    private static final String useCase4 =  "                           " +                       
+                                            "  |  |  |  |  |  |  |  |  |" +
+                                            "  |  |  |  |  |  |  |  |  |";
+
+                    
+    @Ignore @Test
     public void accountReport() {
         List<AccountNumber> accountNumbers = Arrays.asList(
                         new AccountNumber(valid),
@@ -32,10 +39,21 @@ public class AccountNumberReportTest {
         AccountNumberReport.report(accountNumbers, writer::write);
         
         assertEquals("Report contents are incorrect", 
-                        "123456789 \n"    +
+                        "123456789\n"    +
                         "888888888 ERR\n" +
                         "?88888888 ILL\n",  writer.toString());
                         
+    }
+    
+    @Test
+    public void useCase4OneValid() {
+        List<AccountNumber> accountNumbers = Arrays.asList(
+                        new AccountNumber(useCase4));
+        StringWriter writer = new StringWriter(500);
+        AccountNumberReport.report(accountNumbers, writer::write);
+        
+        assertEquals("Should be one alternative 711111111\n", "711111111\n",
+                        writer.toString());
     }
 
 }

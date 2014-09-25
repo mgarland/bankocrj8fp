@@ -22,7 +22,7 @@ public class OCR {
     private static final int DIGITS_PER_LINE = 9;
     private static final int DIGIT_PATTERNS_PER_NUMBER_PER_LINE = 3;
 
-    // Partitions a String 's' into a list of Strings of length 'i'
+    // Partitions a String 's' into 'i' partitions
     private static BiFunction<String, Integer, List<String>> 
         PARTITION_STRING = (s, i) -> { 
                    int len = s.length() / i;
@@ -36,13 +36,11 @@ public class OCR {
                    return result;
         };
 
-    // Partitions each of the Strings in the list 'l' into
-    // a list of Strings of length 'i'
+    // Partitions each of the Strings in the list 'l' into 'i' partitions
     private static BiFunction<List<String>, Integer, List<List<String>>> 
         PARTITION_STRING_LIST = (l, i) ->
                              l.stream()
                               .map(s -> PARTITION_STRING.apply(s, i))
-                              .collect(Collectors.toList()).stream()
                               .collect(Collectors.toList());
                              
     // Zip two Streams of Strings: (a, b, c) (d, e, f) -> ((ad), (be), (cf))

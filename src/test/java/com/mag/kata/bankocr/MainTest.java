@@ -15,6 +15,7 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class MainTest {
@@ -56,7 +57,7 @@ public class MainTest {
         }
 
     }
-    
+
     @Test
     public void runMainFail() {
         try {
@@ -71,7 +72,7 @@ public class MainTest {
             List<String> expectedRptLines = Files
                             .readAllLines(expectedRptFilePath);
 
-            assertNotEquals("Report ouptut should be incorrect", 
+            assertNotEquals("Report output should be incorrect",
                   expectedRptLines.stream().collect(Collectors.joining(", ")), 
                   rptLines.stream().collect(Collectors.joining(", ")));
 

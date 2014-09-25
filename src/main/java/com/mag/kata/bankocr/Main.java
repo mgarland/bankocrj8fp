@@ -41,7 +41,7 @@ public class Main {
                                      AccountNumberCollector::combine);
                             
             // Report on the account numbers
-            report(collector.getAccountNumbers(), writer::write);      
+            report(collector.getAccountNumbers(), writer::write);
 
         } catch (IOException ex) {
             System.out.println("Error reading file: " + inputFile +
