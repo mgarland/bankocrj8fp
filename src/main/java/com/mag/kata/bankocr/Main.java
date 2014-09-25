@@ -28,18 +28,14 @@ public class Main {
         
         try (PrintWriter writer = new PrintWriter(new FileWriter(outputFile))) {
 
-            // Slurp the input file and add line numbers
-            Path file = Paths.get(inputFile);
-            List<Indexed<String>> indexedLines = 
-                    StreamUtils.zipWithIndex(Files.readAllLines(file).stream())
-                               .collect(Collectors.toList());
-            
-            // Create account numbers from the input lines
-            AccountNumberCollector collector = indexedLines.stream()
-                            .collect(AccountNumberCollector::new,
-                                     AccountNumberCollector::accept,
-                                     AccountNumberCollector::combine);
-                            
+            // Slurp the input file, add line numbers, create the accounts
+            AccountNumberCollector collector =
+                    StreamUtils.zipWithIndex(Files.readAllLines(Paths.get(inputFile))
+                               .stream())
+                               .collect(AccountNumberCollector::new,
+                                        AccountNumberCollector::accept,
+                                        AccountNumberCollector::combine);
+
             // Report on the account numbers
             report(collector.getAccountNumbers(), writer::write);
 
