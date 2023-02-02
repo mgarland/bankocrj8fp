@@ -1,6 +1,5 @@
 package com.mag.kata.bankocr;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.function.BiFunction;
 import java.util.function.Consumer;
@@ -17,10 +16,6 @@ public class AccountNumberReport {
      * @param accountNumbers the account number to report on
      * @param output where to write the output
      */
-    /**
-     * @param accountNumbers
-     * @param output
-     */
     public static void report(List<AccountNumber> accountNumbers,
                               Consumer<String> output) {
         
@@ -32,6 +27,7 @@ public class AccountNumberReport {
 
         // process each account number
         for (AccountNumber accountNumber : accountNumbers) {
+            System.out.println("accountNumber: " + accountNumber.accountNumber);
             if (accountNumber.getStatus() == Status.OK) {
                 // account number is valid, output it
                 output.accept(formatOutput.apply(accountNumber, null));

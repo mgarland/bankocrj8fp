@@ -1,10 +1,10 @@
 package com.mag.kata.bankocr;
 
+import com.codepoetics.protonpack.Indexed;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
-
-import com.codepoetics.protonpack.Indexed;
 
 /**
  * Partition lines by the size of an account number entry.
@@ -15,8 +15,8 @@ import com.codepoetics.protonpack.Indexed;
 public class AccountNumberCollector implements Consumer<Indexed<String>> {
 
     private static final int NUM_LINES_PER_ENTRY = 4;
-    private StringBuilder currentLine = new StringBuilder();
-    private List<AccountNumber> accountNumbers = new ArrayList<>();
+    private final StringBuilder currentLine = new StringBuilder();
+    private final List<AccountNumber> accountNumbers = new ArrayList<>();
 
     /* 
      * Processes the current line.  An Indexed<String> contains
