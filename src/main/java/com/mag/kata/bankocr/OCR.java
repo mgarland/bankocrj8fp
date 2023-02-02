@@ -55,7 +55,6 @@ public class OCR {
      * @return Optional<Integer> for valid digits, empty Optional if invalid
      */
     public static List<Optional<Integer>> parse(String accountNumberInputLine) {
-        System.out.println(accountNumberInputLine);
         // partition the input line into 3 lines
         List<String> lines = PARTITION_STRING
                                      .apply(accountNumberInputLine, 

@@ -27,7 +27,6 @@ public class AccountNumberReport {
 
         // process each account number
         for (AccountNumber accountNumber : accountNumbers) {
-            System.out.println("accountNumber: " + accountNumber.accountNumber);
             if (accountNumber.getStatus() == Status.OK) {
                 // account number is valid, output it
                 output.accept(formatOutput.apply(accountNumber, null));
