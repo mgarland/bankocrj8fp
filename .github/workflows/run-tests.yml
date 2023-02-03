@@ -1,8 +1,8 @@
 name: Run Tests
-run-name: ${{ github.actor }} is package artifacts 🚀
+run-name: ${{ github.actor }} is packaging artifacts 🚀
 on: [push]
 jobs:
-  Explore-GitHub-Actions:
+  Package-Artifacts:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -10,8 +10,10 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
-      - run: mvn --batch-mode --update-snapshots verify
-      - run: mkdir staging && cp target/*.jar staging
+      - name: Package artifacts
+        run: mvn --batch-mode --update-snapshots verify
+      - name: Copy artifacts to staging
+        run: mkdir staging && cp target/*.jar staging && cp src/test/resources/accountnumbers.txt staging
       - uses: actions/upload-artifact@v3
         with:
           name: Package
