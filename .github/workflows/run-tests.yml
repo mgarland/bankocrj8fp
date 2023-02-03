@@ -19,7 +19,7 @@ jobs:
           name: Package
           path: staging
       - name: Run it
-        run: java -jar bankocrj8fp-0.0.1-SNAPSHOT.jar staging/accountnumbers.txt
+        run: java -jar staging/bankocrj8fp-0.0.1-SNAPSHOT.jar staging/accountnumbers.txt
       - name: Run results
         run: cat staging/accountnumbers.txt.report
       - run: echo "🍏 This job's status is ${{ job.status }}."
