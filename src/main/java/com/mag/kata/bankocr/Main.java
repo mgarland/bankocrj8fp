@@ -1,18 +1,14 @@
 package com.mag.kata.bankocr;
 
-import static com.mag.kata.bankocr.AccountNumberReport.report;
+import com.codepoetics.protonpack.StreamUtils;
 
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.List;
-import java.util.stream.Collectors;
 
-import com.codepoetics.protonpack.Indexed;
-import com.codepoetics.protonpack.StreamUtils;
+import static com.mag.kata.bankocr.AccountNumberReport.report;
 
 /**
  * Application main.  Input is a list of file paths.

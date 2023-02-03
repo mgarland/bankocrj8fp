@@ -1,6 +1,5 @@
 package com.mag.kata.bankocr;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.function.BiFunction;
 import java.util.function.Consumer;
@@ -16,10 +15,6 @@ public class AccountNumberReport {
      * 
      * @param accountNumbers the account number to report on
      * @param output where to write the output
-     */
-    /**
-     * @param accountNumbers
-     * @param output
      */
     public static void report(List<AccountNumber> accountNumbers,
                               Consumer<String> output) {

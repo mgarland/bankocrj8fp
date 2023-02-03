@@ -1,11 +1,9 @@
 package com.mag.kata.bankocr;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import com.mag.kata.bankocr.Digit;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the Digit class.
@@ -34,13 +32,13 @@ public class DigitTest {
 
     @Test
     public void testValidDigits() {
-        assertEquals("expected 8", Integer.valueOf(8), Digit.get(eight).get());
-        assertEquals("expected 5", Integer.valueOf(5), Digit.get(five).get());
+        assertEquals(Integer.valueOf(8), Digit.get(eight).get(), "expected 8");
+        assertEquals(Integer.valueOf(5), Digit.get(five).get(), "expected 5");
     }
     
     @Test
     public void testInvalidDigits() {
-        assertTrue("expected Optional.empty", !Digit.get(invalid1).isPresent());
-        assertTrue("expected Optional.empty", !Digit.get(invalid2).isPresent());
+        assertFalse(Digit.get(invalid1).isPresent(), "expected Optional.empty");
+        assertFalse(Digit.get(invalid2).isPresent(), "expected Optional.empty");
     }
 }

@@ -1,13 +1,13 @@
 package com.mag.kata.bankocr;
 
+import com.codepoetics.protonpack.StreamUtils;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.BiFunction;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
-import com.codepoetics.protonpack.StreamUtils;
 
 /**
  * Parse the account number input line pattern into its digits.
@@ -23,8 +23,8 @@ public class OCR {
     private static final int DIGIT_PATTERNS_PER_NUMBER_PER_LINE = 3;
 
     // Partitions a String 's' into 'i' partitions
-    private static BiFunction<String, Integer, List<String>> 
-        PARTITION_STRING = (s, i) -> { 
+    private static final BiFunction<String, Integer, List<String>>
+        PARTITION_STRING = (s, i) -> {
                    int len = s.length() / i;
                    List<String> result = new ArrayList<>();
                    for (int j = 0; j < i; j++) {
@@ -37,14 +37,14 @@ public class OCR {
         };
 
     // Partitions each of the Strings in the list 'l' into 'i' partitions
-    private static BiFunction<List<String>, Integer, List<List<String>>> 
+    private static final BiFunction<List<String>, Integer, List<List<String>>>
         PARTITION_STRING_LIST = (l, i) ->
                              l.stream()
                               .map(s -> PARTITION_STRING.apply(s, i))
                               .collect(Collectors.toList());
                              
     // Zip two Streams of Strings: (a, b, c) (d, e, f) -> ((ad), (be), (cf))
-    private static BiFunction<Stream<String>, Stream<String>, Stream<String>>
+    private static final BiFunction<Stream<String>, Stream<String>, Stream<String>>
         ZIP_TWO_STRING_LISTS = (l, r) ->  StreamUtils.zip(l, r, (a,b) -> a + b);
 
     /**
@@ -55,7 +55,6 @@ public class OCR {
      * @return Optional<Integer> for valid digits, empty Optional if invalid
      */
     public static List<Optional<Integer>> parse(String accountNumberInputLine) {
-        
         // partition the input line into 3 lines
         List<String> lines = PARTITION_STRING
                                      .apply(accountNumberInputLine, 
@@ -73,7 +72,7 @@ public class OCR {
                 ZIP_TWO_STRING_LISTS.apply(digitPartitions.get(0).stream(),
                     ZIP_TWO_STRING_LISTS.apply(digitPartitions.get(1).stream(), 
                                                digitPartitions.get(2).stream()))
-                                        .collect(Collectors.toList());
+                                        .toList();
         
         // Convert the patterns to their number representation
         return digits.stream()
