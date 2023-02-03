@@ -1,6 +1,6 @@
 name: Run Tests
 run-name: ${{ github.actor }} is packaging artifacts 🚀
-on: [push pull_request]
+on: [push, pull_request]
 jobs:
   Package-Artifacts:
     runs-on: ubuntu-latest
