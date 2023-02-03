@@ -20,4 +20,6 @@ jobs:
           path: staging
       - name: Run it
         run: cd staging && java -jar bankocrj8fp-0.0.1-SNAPSHOT.jar accountnumbers.txt
+      - name: Run results
+        run: cat accountnumbers.txt
       - run: echo "🍏 This job's status is ${{ job.status }}."
