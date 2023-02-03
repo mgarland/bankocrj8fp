@@ -17,5 +17,5 @@ jobs:
           ls ${{ github.workspace }}
       - name: Run tests
         run: |
-          mvn test
+          cd ${{ github.workspace }} && mvn test
       - run: echo "🍏 This job's status is ${{ job.status }}."
