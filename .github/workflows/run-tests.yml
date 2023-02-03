@@ -10,8 +10,11 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '17'
+      - name: Java version
+        run: |
+          java -version
       - name: maven version
         run: |
-          mvn version
+          mvn --version
       - run: mvn test
       - run: echo "🍏 This job's status is ${{ job.status }}."
